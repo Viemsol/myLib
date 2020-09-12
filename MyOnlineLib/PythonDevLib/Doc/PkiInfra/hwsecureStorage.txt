@@ -1,0 +1,4 @@
+heart beat attavk.......reading RAM back with ..not data validity check
+ cold boot attack ... freezing ram ..removing it and reading it
+ that wy Seure Memory is used to store keys.. space of secure store is low  ~4k
+ ..so ECC is used in embeeded as keys are small size

@@ -1,0 +1,6 @@
+REPLAY_ATTACK
+protected against replay attacks, such as using message counters, and establishing sessions with random elements involved
+
+esare key content after use, so that some one will not read ramnd key
+
+ADA : Amarican Disablity Act. ADA delay

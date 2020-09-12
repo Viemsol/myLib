@@ -1,0 +1,7 @@
+to generate config file to be done once, we can set log and lot of other thngs in this
+C:\Users\ndhavalikar\Desktop\Allegion_Nand\Personal\DoxyGen\Test>doxygen -g DoxyConfig 
+to generate
+C:\Users\ndhavalikar\Desktop\Allegion_Nand\Personal\DoxyGen\Test>doxygen DoxyConfig
+
+install MikTex for generating pdf
+go to latex folder and run make pdf to generated pdf of document

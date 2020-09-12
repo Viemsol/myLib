@@ -1,0 +1,39 @@
+Microsoft Windows [Version 10.0.18363.959]
+(c) 2019 Microsoft Corporation. All rights reserved.
+
+C:\WINDOWS\system32>cd C:\Users\ndhavalikar\Desktop\devcon
+
+C:\Users\ndhavalikar\Desktop\devcon>devcon usb*
+devcon Usage: devcon [-r] [-m:\\<machine>] <command> [<arg>...]
+For more information, type: devcon help
+
+C:\Users\ndhavalikar\Desktop\devcon>devcon find usb*
+USB\VID_C251&PID_2722\V0350FKE                              : USB Input Device
+USB\VID_1A40&PID_0101\6&118FFB79&0&1                        : Generic USB Hub
+USB\VID_0403&PID_6001\FTFMMOUG                              : USB Serial Converter
+USB\VID_0000&PID_0538\5&2EA6EE8C&0&3                        : USB Input Device
+USB\VID_0A5C&PID_5832\0123456789ABCD                        : USB Composite Device
+USB\VID_1366&PID_0105\000440152112                          : USB Composite Device
+USB\VID_8087&PID_0A2B\5&2EA6EE8C&0&6                        : Intel(R) Wireless Bluetooth(R)
+USB\VID_1A40&PID_0101\5&2EA6EE8C&0&1                        : Generic USB Hub
+USB\VID_2717&PID_FF48&MI_01\6&79A7596&0&0001                : ADB Interface
+USB\VID_2717&PID_FF48&MI_00\6&79A7596&0&0000                : Redmi Note 4
+USB\VID_2717&PID_FF48\3542851E9904                          : USB Composite Device
+USB\VID_0925&PID_3881\6&118FFB79&0&3                        : Saleae Logic USB Logic Analyzer
+USB\VID_0A5C&PID_5832&MI_01\6&528937A&0&0001                : Microsoft Usbccid Smartcard Reader (WUDF)
+USB\VID_0A5C&PID_5832&MI_00\6&528937A&0&0000                : Dell ControlVault w/o Fingerprint Sensor
+USB\ROOT_HUB30\4&4FD2902&0&0                                : USB Root Hub (USB 3.0)
+USB\VID_0000&PID_0002\5&2EA6EE8C&0&11                       : Unknown USB Device (Device Descriptor Request Failed)
+USB\VID_1366&PID_0105&MI_02\8&86C9879&0&0002                : J-Link driver
+USB\VID_1366&PID_0105&MI_00\8&86C9879&0&0000                : JLink CDC UART Port (COM6)
+18 matching device(s) found.
+
+C:\Users\ndhavalikar\Desktop\devcon>devcon disable "@USB\VID_2717&PID_FF48\3542851E9904"
+USB\VID_2717&PID_FF48\3542851E9904                          : Disabled
+1 device(s) disabled.
+
+C:\Users\ndhavalikar\Desktop\devcon>devcon enable "@USB\VID_2717&PID_FF48\3542851E9904"
+USB\VID_2717&PID_FF48\3542851E9904                          : Enabled
+1 device(s) are enabled.
+
+C:\Users\ndhavalikar\Desktop\devcon>

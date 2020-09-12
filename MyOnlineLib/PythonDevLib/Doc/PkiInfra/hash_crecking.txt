@@ -1,0 +1,3 @@
+password are stored in hash
+hacker if get all hash the he canot do much , he cansot send hash to server as he dont know un and password as its not reversible 
+he use raninbow table to get password

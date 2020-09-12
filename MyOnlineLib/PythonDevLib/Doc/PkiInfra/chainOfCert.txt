@@ -1,0 +1,13 @@
+Let say On connection to server, Server send below cert chain
+
+ServerCert->IntermidiateCA1->IntermidiateCA2-> ROOT CA
+
+on our device any certificate if we have it will work,ie if device connecting to server have IntermidiateCA1 ,
+
+Cert trust chin will be finished in 1st iteration and validation of chain  IntermidiateCA1->IntermidiateCA2-> ROOT CA 
+will be ignored
+
+if we have  ROOT CA installed on our device , device will validate all cft chain and it will take time.
+
+basically ROOT CA  certificates have long expiry time , so device need not have to be updated frquenty
+but cft validation is expensive in memory and time , also , attaker having cft signed by root ca , it can connect to device

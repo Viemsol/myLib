@@ -1,0 +1,3 @@
+23 pepole in room , two people sharing same bithday probeblity is 50%...
+
+So if we have (2^256 / 11 )sha256 signed files, we have 50% chances that two files collide
