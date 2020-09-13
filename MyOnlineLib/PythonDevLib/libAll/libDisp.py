@@ -160,18 +160,19 @@ def printD(tag,Data,disAllFormat=0): #Print data,keys, for tag only 8 charectes 
 init(autoreset=True) # use init()  fro color to retain every print, use print(Style.RESET_ALL) to reset
 libtest = 0
 if(libtest):
-    printH("pythonLib")
-    
-    bytes = b'1234'
-    printI("this is byte to hex string convertion test input b'1234' : output :")
-    print(bytesToHex(bytes))
-    printI("this is hex string to bytes convertion test input ""10aB")
-    printD("OUTPUT",hexStrToBytes("10aB"),2)
-    printI("this is integer to hex string test input  100 ")
-    printD("OUTPUT",intToHexString(100),0)
-    printI("This is String Disply test")
-    printD("TAG","1234")
-    printI("This is bytearray Disply test")
-    printD("TAG",str2ByteArray("1234"))
-    printE("This is Error in  pythonLib")
-    printS("Sucess!!")
+	printH("pythonLib")
+	bytes = b'1234'
+	printI("this is byte to hex string convertion test input b'1234' : output :")
+	print(bytesToHex(bytes))
+	printI("this is hex string to bytes convertion test input ""10aB")
+	printD("OUTPUT",hexStrToBytes("10aB"),2)
+	printI("this is integer to hex string test input  100 ")
+	printD("OUTPUT",intToHexString(100),0)
+	printI("This is String Disply test")
+	printD("TAG","1234")
+	printI("This is bytearray Disply test")
+	printD("TAG",str2ByteArray("1234"))
+	printE("This is Error in  pythonLib")
+	printS("Sucess!!")
+	printI("Aligned Display Test")
+	printTagValAligned("TAGNAME","TEXT NAME",10)
