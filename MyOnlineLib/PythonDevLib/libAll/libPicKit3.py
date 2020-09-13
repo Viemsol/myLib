@@ -1,4 +1,4 @@
-def picFlashDevice(model,hexpath=currentDevPath):
+def picFlashDevice(model,hexpath):
 	#path = "C:\Program Files\Microchip\MPLABX\v4.05\mplab_ipe\pk3cmd.exe" #add this to env variable
 	if(os.path.isfile(hexpath)):
 		printD("Flashing "+hexpath)
