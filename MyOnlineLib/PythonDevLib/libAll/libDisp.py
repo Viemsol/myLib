@@ -1,77 +1,12 @@
+from .libConvert import *
 import sys
 import binascii
 import textwrap
 from colorama import init
 from colorama import Fore, Back, Style
 import os
-
-
-
-###################
-# function return  bytes from hex string it only process 0-9 ,a-f , A-F else thows exception
-# eg "10AB" =   0x10 0xAB ,---- "1" invalid input , "01" this is valid input shuld be multiple of 2
-###################
-def hexStrToBytes(hexStr):
-    data = bytearray.fromhex(hexStr) # get bytes from hex string
-    return data
-###################
-# function return  string haxdecimal representation of integr input 
-###################
-def intToHexString(intData):
-    return(hex(intData))
-
-##########
-#function take string as input ang return byte array also null chrecter is included in array
-##########
-def str2ByteArray(strData):
-    data = bytearray(strData,'utf-8')
-    data.append(0) # append null charecter
-    return data
-
-##########
-#function take string as input and return byte array, null chrecter is NOT included in array
-##########
-def strlen2ByteArray(strData):
-    data = bytearray(strData,'utf-8')
-    return data
-
-###########
-#convert raw bytes to hex representation  ,b'0123' => 30313233
-##########
-def bytesToHex(bytesObj):
-    hexData = bytesObj.hex()
-    return(hexData)
-##############
-
-##########
-#take raw bytes as input, conver them to string representing each byte in hex format
-##########
-def bytesToHexFormat(byteArray):
-    strHexOut = '0x'+' 0x'.join('{:02x}'.format(x) for x in byteArray)
-    return strHexOut
-##########
-
-###########
-#convert raw bytes to hex representation  ,b'0123' => 0x30 0x31 0x32 0x33
-##########
-def bytesToHexSufix(bytesObj,suffix):
-    strHexOut = suffix+' '+suffix.join('{:02x}'.format(x) for x in byteArray)
-##############
-#Function conver byte object to string b'abcd' => abcd
-###########
-def bytesToAscii(bytesObj):
-    return(bytesObj.decode("utf-8"))
-##########
-#convert large intger to byte array or bytes ie 
-# 1234566666666666666666666666687765443 to raw bytes 0x23, 0x45 ......
-#len is byte array length (32 meanse output byte array is 32 byte long)
-##########
-def intToBytes(intData,len):
-    byteArrayout = intData.to_bytes(len, byteorder='big')
-    return(byteArrayout)
-##########
-#funtion clears the CLI display
-##########
+def printType(variable):
+	print(variable, "is of type", type(variable))
 def dispClear():
     os.system('cls')
 

@@ -1,33 +1,32 @@
 import serial
 from .libDisp import *
 testModule  = 0
-ser = 0
 def setComPort(com,baud,timeoutval):
 	status = False
+	ser = 0
 	try:
-		global ser
 		ser = serial.Serial(com, baud, timeout=timeoutval)
 		ser.close()
-		printI("\n\n\nCom Port:"+com+ " Baudrate:"+str(baud))
+		printI("Com Port:"+com+ " Baudrate:"+str(baud))
 		status  = True;
 	except:
-	  printI("\n\n\nError opening port "+com)
-	return status
-def serSend(bArray):
+		printI("Error opening port "+com )
+	return ser
+def serSend(ser,bArray):
 	ser.open()
 	ser.reset_input_buffer()
 	ser.reset_output_buffer()
 	ser.write(bArray)
 	# wait for tx to finish?
 	ser.close()
-def serRead(lenToRead):
+def serRead(ser,lenToRead):
 	ser.open()
 	tmp_info = ser.read(lenToRead)
 	ser.reset_input_buffer()
 	ser.reset_output_buffer()
 	ser.close()
 	return tmp_info
-def SendAndRead(bArray,readLen):
+def SendAndRead(ser,bArray,readLen):
 	tmp_info = 0;
 	if(len(bArray)):
 		ser.open()
@@ -35,6 +34,7 @@ def SendAndRead(bArray,readLen):
 		ser.reset_output_buffer()
 		ser.write(bArray)
 		tmp_info = ser.read(readLen)
+		#print(tmp_info)
 		ser.reset_input_buffer()
 		ser.reset_output_buffer()
 		ser.close()

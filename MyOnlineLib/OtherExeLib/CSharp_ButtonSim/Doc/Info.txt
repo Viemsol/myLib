@@ -1,0 +1,3 @@
+This tool basically simulates buttons and executes CLI application based on button click.
+All buttons can be configured using settings.ini file
+Each button shuld have command to be executed and if any parameter it takes can be configured.

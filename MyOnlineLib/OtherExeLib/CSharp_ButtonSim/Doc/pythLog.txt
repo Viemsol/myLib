@@ -1,0 +1,21 @@
+C:\Users\acer\Desktop\myLib\MyOnlineLib\OtherExeLib\CSharp_ButtonSim\Doc\pic16f18313.py
+settings.ini
+Executing Command EMPTY
+C:\Users\acer\Desktop\myLib\MyOnlineLib\OtherExeLib\CSharp_ButtonSim\Doc\pic16f18313.py -provision
+C:\Users\acer\Desktop\myLib\MyOnlineLib\OtherExeLib\CSharp_ButtonSim\Doc\pic16f18313.py -factbuild
+C:\Users\acer\Desktop\myLib\MyOnlineLib\OtherExeLib\CSharp_ButtonSim\Doc\pic16f18313.py -factBuild
+C:\Users\acer\Desktop\myLib\MyOnlineLib\OtherExeLib\CSharp_ButtonSim\Doc\pic16f18313.py factBuild
+settings.ini
+Executing Command factBuild
+C:\Users\acer\Desktop\myLib\MyOnlineLib\OtherExeLib\CSharp_ButtonSim\Doc\pic16f18313.py factBuild
+settings.ini
+Executing Command factBuild
+C:\Users\acer\Desktop\myLib\MyOnlineLib\OtherExeLib\CSharp_ButtonSim\Doc\pic16f18313.py provision
+settings.ini
+Executing Command provision
+C:\Users\acer\Desktop\myLib\MyOnlineLib\OtherExeLib\CSharp_ButtonSim\Doc\pic16f18313.py provisionLocal
+settings.ini
+Executing Command provisionLocal
+C:\Users\acer\Desktop\myLib\MyOnlineLib\OtherExeLib\CSharp_ButtonSim\Doc\pic16f18313.py provisionLocal
+settings.ini
+Executing Command provisionLocal
