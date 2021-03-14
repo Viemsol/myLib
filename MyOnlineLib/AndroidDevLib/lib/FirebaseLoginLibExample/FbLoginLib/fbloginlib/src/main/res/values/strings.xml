@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">FbLoginLib</string>
+    <string name="pwHint">"Password (6 characters minimum)"</string>
+    <string name="vcodeHint">"Verification Code"</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Main Act Fragment</string>
+    <string name="tcString">By continuing you except our <font color='#01C6DB'> T&amp;C </font> and </string>
+    <string name="ppString">Our <font color='#01C6DB'> Privacy Policy </font> </string>
+    <string name="gotoSignin"> Already have account? Click to  <font color='blue'> Signin </font> </string>
+    <string name="gotoReg"> Not registered yet ? Click to <font color='blue'> Register </font> </string>
+
+
+</resources>

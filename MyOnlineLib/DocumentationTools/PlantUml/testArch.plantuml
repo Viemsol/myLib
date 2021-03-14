@@ -1,0 +1,32 @@
+@startuml TestUMl
+'referance https://real-world-plantuml.com/?type=sequence
+
+class Utility
+{
+    Firmware Image
+
+    Nvm Manager
+}
+
+    together {
+        class CoreApplication
+        class CommApplication
+        CoreApplication <-> CommApplication
+    }
+
+     together {
+        class CoreSupportFwDwonload
+        class CoreSupportFwupdate
+         CoreSupportFwDwonload -left-> CoreSupportFwupdate
+    }
+
+
+        CoreApplication -down-> CoreSupportFwDwonload
+        CommApplication <-down-> CoreSupportFwupdate
+
+
+CoreSupportFwupdate .down.> Utility
+CoreSupportFwDwonload .down.> Utility
+CommApplication .down.> Utility
+CoreApplication .down.> Utility
+@enduml

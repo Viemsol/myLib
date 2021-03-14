@@ -1,0 +1,9 @@
+@startuml
+
+state Elevator {
+  Stopped -right-> Moving : Next Stop
+  Moving --> Stopped : No More Stops
+  Moving --> Moving : Has More Stops
+}
+
+@enduml

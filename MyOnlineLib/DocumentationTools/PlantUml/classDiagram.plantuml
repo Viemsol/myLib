@@ -1,0 +1,11 @@
+@startuml TestUMl
+'referance https://real-world-plantuml.com/?type=sequence
+/'
+Domain Models (class diagrams)
+'/
+class "Player" as player{
+    name : string
+    age : int
+}
+
+@enduml

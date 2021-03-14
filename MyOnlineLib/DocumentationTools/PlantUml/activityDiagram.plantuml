@@ -1,0 +1,23 @@
+@startuml
+'referance https://real-world-plantuml.com/?type=sequence
+' Activity diagram are basicaly operational flow in sytem
+'they are lick frlow chat ..
+'conditonal represntation(branching) and parallel flow  can be represented
+' Fork
+'join: 
+'mearge
+' its control flow and no meaages are passed.
+' example flow to apply for addmittion in college
+' how you wiil describe using sclag lock or adding user?
+start
+'black and wite view
+skinparam monochrome true
+:Init Phase;
+:Transfer Phase;
+note right
+  long running activity,
+  process requires signal to proceed
+end note
+:Termination Phase;
+stop
+@enduml

@@ -1,0 +1,33 @@
+@startuml
+' usecase diagram represent dinamic nature of sytem
+' usecase diagram is graphical representation of what sytem must do
+'class diagram show static nature of sytem
+' use case diagram represent how sytem interact with actor
+' whiout represnticg details of how things work 
+actor User
+actor Server
+
+rectangle session {
+:User: --> (Register)
+:User: --> (Log in)
+:User: --> (Log out)
+:User: --> (Reset password)
+}
+
+rectangle reviews {
+:User: --> (Search a movie)
+:User: --> (Leave review)
+:User: --> (Reviews feed)
+:User: --> (Comment review in feed)
+:User: --> (Edit review)
+:User: --> (Delete review)
+}
+
+rectangle profile {
+:User: --> (View profile)
+:User: --> (View other user's profile)
+}
+
+:Server: --> (Fetch movie data from OMDB)
+
+@enduml

@@ -1,0 +1,16 @@
+@startuml TestUMl
+'referance https://real-world-plantuml.com/?type=sequence
+box "Source Endpoint"
+    participant "Flow Control" as FC
+    participant "Data Service" as DS
+end box
+
+' colored box blue: #99CCFF ,orange #FFCC99
+box "Sink Endpoint" #99CCFF
+    participant "Data Client" as DC
+    participant "Remote Flow Control" as RFC
+end box
+
+FC-->DS
+DS<--RFC
+@enduml

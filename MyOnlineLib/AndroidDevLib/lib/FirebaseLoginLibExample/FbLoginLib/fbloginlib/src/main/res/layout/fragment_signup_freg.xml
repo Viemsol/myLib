@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/layoutsignup">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignupFreg">
+
+    <!-- TODO: Update blank fragment layout -->
+   <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+     >
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+
+        />
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="50dp"
+        android:text="User Registration"
+        android:textSize="25sp"
+        android:textAllCaps="true"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <EditText
+        android:id="@+id/EtEmail"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="30dp"
+
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:hint="Em@il or Phone No"/>
+    <Button
+        android:id="@+id/ButPhoneVerify"
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:visibility="gone"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="20dp"
+        android:text="Verify Phone" />
+
+    <EditText
+        android:id="@+id/EtPassword"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="@string/pwHint"/>
+    <EditText
+        android:id="@+id/EtPasswordRe"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="Re-enter Password"/>
+
+    <EditText
+        android:id="@+id/EtName"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="20dp"
+        android:inputType="textPersonName"
+        android:hint="Your Name" />
+    <EditText
+        android:id="@+id/EtPhoneNo"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="20dp"
+        android:inputType="phone"
+        android:digits="0123456789+"
+        android:hint="Phone Number"
+        android:imeOptions="actionDone"/>
+    <Button
+        android:id="@+id/ButSignup"
+        android:layout_width="100dp"
+        android:layout_height="45dp"
+
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="20dp"
+        android:text="Signup" />
+
+    <TextView
+        android:id="@+id/TvSignin"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/gotoSignin" />
+    <TextView
+        android:id="@+id/tcPage"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:visibility="gone"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/tcString" />
+    <TextView
+        android:id="@+id/ppPage"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:visibility="gone"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="5dp"
+        android:text="@string/ppString" />
+</LinearLayout>
+
+</FrameLayout>
+</ScrollView>

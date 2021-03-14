@@ -1,0 +1,5 @@
+PS C:\Users\ndhavalikar\Desktop\ps_Help> ./arg_Print.ps1 -username A                                                    Hello, World!
+A
+PS C:\Users\ndhavalikar\Desktop\ps_Help> ./arg_Print.ps1                                                                Hello, World!
+
+PS C:\Users\ndhavalikar\Desktop\ps_Help> 

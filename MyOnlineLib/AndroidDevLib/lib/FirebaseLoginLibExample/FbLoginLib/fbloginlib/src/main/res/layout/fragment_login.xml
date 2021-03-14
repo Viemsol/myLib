@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/layoutLogin">
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp"
+        >
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+
+            />
+  <TextView
+      android:id="@+id/textView2"
+      android:layout_width="match_parent"
+      android:layout_height="45dp"
+
+      android:layout_marginTop="10dp"
+      android:gravity="center"
+      android:text="Login"
+      android:textSize="25dp"
+      android:textAllCaps="true"
+      android:textColor="@color/colorPrimaryDark" />
+
+  <EditText
+      android:id="@+id/EtEmail"
+      android:layout_width="match_parent"
+      android:layout_height="45dp"
+
+      android:layout_marginStart="50dp"
+      android:layout_marginRight="5dp"
+      android:layout_marginTop="40dp"
+
+      android:ems="10"
+      android:inputType="textEmailAddress"
+      android:hint="Em@il or Phone No"/>
+
+  <Button
+      android:id="@+id/ButPhoneVerify"
+      android:layout_width="200dp"
+      android:layout_height="45dp"
+      android:visibility="gone"
+      android:layout_marginStart="50dp"
+      android:layout_marginEnd="5dp"
+      android:layout_marginTop="20dp"
+      android:text="Verify Phone" />
+
+  <EditText
+      android:id="@+id/EtPassword"
+      android:layout_width="match_parent"
+      android:layout_height="45dp"
+
+      android:layout_marginLeft="50dp"
+      android:layout_marginRight="5dp"
+      android:layout_marginTop="20dp"
+      android:ems="10"
+      android:inputType="textPassword"
+      android:hint="Password / Verification code"/>
+
+  <Button
+      android:id="@+id/ButLogin"
+      android:layout_width="100dp"
+      android:layout_height="45dp"
+
+      android:layout_marginLeft="50dp"
+      android:layout_marginRight="5dp"
+      android:layout_marginTop="20dp"
+      android:text="Login" />
+
+  <TextView
+      android:id="@+id/TvSignup"
+      android:layout_width="match_parent"
+      android:layout_height="45dp"
+
+      android:layout_marginLeft="50dp"
+      android:layout_marginRight="5dp"
+      android:layout_marginTop="40dp"
+      android:text="@string/gotoReg" />
+
+  <TextView
+      android:id="@+id/TvForgotPw"
+      android:layout_width="match_parent"
+      android:layout_height="45dp"
+      android:textColor="@color/orange"
+      android:layout_marginLeft="50dp"
+      android:layout_marginRight="5dp"
+      android:layout_marginTop="5dp"
+      android:text="Forgot Password ? " />
+</LinearLayout>
+
+</FrameLayout>
+</ScrollView>

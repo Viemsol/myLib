@@ -1,0 +1,126 @@
+@startuml TestUMl
+'referance https://real-world-plantuml.com/?type=sequence
+' this is single line comment
+/'
+this is mutiline 
+comment
+'/
+
+/'
+UML : Stands for Unified modelling laguage
+It is not programming language but It help Enng,Arcitect (how SW component communicate with each hotor), Busness proffesionals to
+to to design or visualize flow/system
+* No matter which programming laguage you use this topic is for evey developer
+* No matter how you write software, How bertter your software is but
+unless and untill you cant represet/explain how it dose , what it dose it is very difficult
+*other to undersand, appritiate your software. that why you need some tool represet
+diargam oneof it is sequence diagram.
+*using graphile tool may be sometimes difficut and tedious.
+* today i am going to talk about a tool which use english like sytex to
+represent those diagram..A plantuml tool
+platuml is tool to prepresent sequence diagram in text format
+easy to modify
+these uml code can be embeded in any code and doxygen like toolcan generate them
+plugins avilable in crom , firefox to see them
+'/
+
+/'Agenda:
+plantUml Tool: javaplugin and Visualstudiocode setup
+Basics and Handson on plantUML tool
+Examle of our product using plant uml
+Q and A 
+'/
+
+/'
+Plant uml is very siple tool to lean.
+I will not only cover script but also we will create perfect seques diagram for our code
+We will work with realtime senirio and we will create sequence diagram for same
+in Platuml we can creat differantdiagram, likeclass diagram, use case digaram..today we will discuss 
+
+statem amchine using sequece diagram
+--->Its text based so easy to compare and version control
+-->easytointgrate in code ..and tools can build it in runtime (space saving)
+'/
+/'Visual Studio Code
+Its tool in which we write plat uml script and visualize output
+It aso generate diagram in differant outputformat
+Install Visual Studio Code
+Install plant uml plugin by clicking and serching it in extentions
+'/
+
+' set classic style i.e remove object from bootom
+skinparam Style strictuml 
+' set message alignment to center
+skinparam SequenceMessageAlignment center
+' Set titel
+title: <size:20><&heart>Use of OpenIconic<&heart></size>
+'[start state ] [to direction ->,-->] [end state] : [message]
+you --> Friend1 :Calling
+Friend1 -> Friend1 :Shall i receive ?
+you <- Friend1:Hello
+you --> Friend2 : calling
+' self state
+Friend2 ->Friend2 :Shall i receive ?
+' if else statement
+alt I am busy
+    Friend2 --> you :Disconnect
+else I am not busy
+     Friend2 -> you :Hello
+end
+
+Spam --> Friend2 : Calling
+'loop
+loop 10 Times
+    Friend2 ->Friend2 :Shall i receive ?
+end
+
+' Actor is a person who originates sequence [note: this shuld be first step]
+' but for training purpose its taken last
+'also thease are modifiers which h=ches symbols so from sqare to other 
+' all are below
+actor Teacher
+    Teacher -> you :call everyone
+    ' note 
+    note left : conversation
+    note right : conversation
+'this sambol can e givent to any machine or somthing which controls or take desigion
+control HeadMaster
+    HeadMaster-->Teacher : command
+    ' Adding code in note
+    note right
+    <code>
+        main() {
+        printf("Hello world");
+        }
+    </code>
+    end note
+'activate is keyword used to indicate active satae 
+HeadMaster-->Teacher : All Done?
+activate Teacher
+Teacher -> you : all done ?
+activate you
+Teacher <- you : Yes
+deactivate you
+HeadMaster<--Teacher : All Done
+' default is participant class , other are deactivate,database,boundary
+deactivate Teacher
+database db 
+boundary lock
+'++ can be used to indicate activity
+you -> Friend1 ++: getInfo()
+    Friend1->Friend1: findinfo()
+    Friend1->you : returnInfo()
+
+' Any program which do not terminate after doing its job is a state machine
+' All sytem log stud be taken at state change, as we know from that what is happening
+
+/' Lets discuss about Use case diagram:
+1) first they show system or application 
+2) then they show people organization who interect with sytem
+3) Then it show basic flow what sytem dose
+'/
+
+' Lets discuss activity diagram:
+
+
+@enduml

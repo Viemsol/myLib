@@ -1,0 +1,29 @@
+@startuml
+
+actor User
+actor Server
+
+rectangle session {
+:User: --> (Register)
+:User: --> (Log in)
+:User: --> (Log out)
+:User: --> (Reset password)
+}
+
+rectangle reviews {
+:User: --> (Search a movie)
+:User: --> (Leave review)
+:User: --> (Reviews feed)
+:User: --> (Comment review in feed)
+:User: --> (Edit review)
+:User: --> (Delete review)
+}
+
+rectangle profile {
+:User: --> (View profile)
+:User: --> (View other user's profile)
+}
+
+:Server: --> (Fetch movie data from OMDB)
+
+@enduml
