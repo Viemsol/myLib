@@ -1,0 +1,37 @@
+This tool basically simulates buttons and executes CLI application based on button click.
+All buttons can be configured using settings.ini file
+Each button shuld have command to be executed and if any parameter it takes can be configured.
+
+1) Welcome ! This is about Windows Tool , which can Create User interface of any CLI command
+2) As we know doing custome UI for any CLI Application is Time consuming, as CLI can take , 
+boolean input, Integer input, File pats , List item as input.
+3) Also Its dificult to remember what are the Arguments Headers to pass
+4) Also Displaying Error Info, Displaying outputs , 
+   For all this thing to Develope User Interface is Pritty time consuming.
+5) Can we have Generic or Configurable Tool which can do this for us?
+
+6) yes ButtonSimulator Tool...Let look in to it how it works.
+
+7) Tool is Fully Configurable by settings.ini file
+
+8) you can create Many button with each button associated with CLI command..
+also Parameters needed  for CLI command such as file inputs , 
+Boolean input , Int input are configurable and cutomized!
+
+9) Tool Also Supports Display outputs in .txt or .xls formats
+
+10) user can also configure differant CLI executable for every button. like .exe,.py.bat 
+
+11) tool also have log box whrere user can see wht CLI command string is executed on button press, 
+if not correct can modifi settings.ini file.
+
+12) Tool also have status window where user can see pass fail status also, reson for Failure which is configurable
+
+14) Configurable Login button which stores temeperory login UN,PW in cred.ini ..which other application can use
+    credential get deleted when application closes
+
+15) user can configure Link to help page , whre functionality of tool can be present
+
+16) Tool name and settings.ini config vertion are configurable and displayed in tool.
+
+Let have a llok at Simple Caluleter CLI Example...just for understanding :)

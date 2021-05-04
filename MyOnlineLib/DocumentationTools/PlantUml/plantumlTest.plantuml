@@ -94,18 +94,20 @@ control HeadMaster
         }
     </code>
     end note
-'activate is keyword used to indicate active satae 
-HeadMaster-->Teacher : All Done?
-activate Teacher
-Teacher -> you : all done ?
-activate you
-Teacher <- you : Yes
-deactivate you
-HeadMaster<--Teacher : All Done
-' default is participant class , other are deactivate,database,boundary
-deactivate Teacher
-database db 
-boundary lock
+group My own Labale
+    'activate is keyword used to indicate active satae 
+    HeadMaster-->Teacher : All Done?
+    activate Teacher
+    Teacher -> you : all done ?
+    activate you
+    Teacher <- you : Yes
+    deactivate you
+    HeadMaster<--Teacher : All Done
+    ' default is participant class , other are deactivate,database,boundary
+    deactivate Teacher
+    database db 
+    boundary lock
+end
 '++ can be used to indicate activity
 you -> Friend1 ++: getInfo()
     Friend1->Friend1: findinfo()

@@ -1,0 +1,15 @@
+@startuml TestUMl
+skinparam Style strictuml 
+skinparam SequenceMessageAlignment center
+title: <size:20>Fw Download Existing</size>
+ComApp -> ComApp : Receive Image Data
+loop Image data Available?
+    ComApp --> FwDownload :fwDownload_StreamData_v3PkgBldr()
+    ComApp -> ComApp : Receive Next Image Data
+    FwDownload --> NvmMgr : WritetoNvm()
+    activate NvmMgr
+    NvmMgr --> FwDownload : Write Status
+    deactivate NvmMgr
+    FwDownload --> ComApp : Status
+end
+@enduml

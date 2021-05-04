@@ -45,7 +45,7 @@ namespace DesktopApp1
             public String ButtonColor;
         }
         // function to create combo box
-        public static DialogResult ComboBox(string title, String[] InputList, ref string SelectValue)
+        public static DialogResult ComboBox(string title, String InputList, ref string SelectValue)
         {
             Form form = new Form();
             Label label = new Label();
@@ -71,9 +71,9 @@ namespace DesktopApp1
             mybox.Anchor = mybox.Anchor | AnchorStyles.Right;
             buttonOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-
-            mybox.Items.AddRange(InputList);
-            mybox.Text = InputList[0];
+            String[] comboItems = InputList.Split(':')[0].Split(',');
+            mybox.Items.AddRange(comboItems);
+            mybox.Text = comboItems[0];
             // Add this ComboBox to form
 
             form.ClientSize = new Size(396, 107);
@@ -87,7 +87,7 @@ namespace DesktopApp1
             form.CancelButton = buttonCancel;
 
             DialogResult dialogResult = form.ShowDialog();
-            SelectValue = mybox.Text.ToString();
+            SelectValue = InputList.Split(':')[1].Split(',')[mybox.SelectedIndex];
 
             return dialogResult;
         }
@@ -609,8 +609,8 @@ namespace DesktopApp1
 
                 if (ButtonArg == "combo")
                 {                    
-                    string[] ArgOptPeraList = ButtonArgOptPera.Split(',');
-                    if(ComboBox(ButtonArgHelp, ArgOptPeraList, ref scriptPerameter) == DialogResult.OK)
+                 
+                    if (ComboBox(ButtonArgHelp, ButtonArgOptPera, ref scriptPerameter) == DialogResult.OK)
                     {
                         // do nothin
                     }

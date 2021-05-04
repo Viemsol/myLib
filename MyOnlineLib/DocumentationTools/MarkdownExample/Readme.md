@@ -14,7 +14,7 @@ Now Below is link
 [link to Google!](http://google.com)
 
 Below is Image ! will display image and ! is removed image link with text is displayed
-![Image ](/image/testimg.png)
+![Image ](image/testimg.png)
 
 ## Codeing 
 **Code**
