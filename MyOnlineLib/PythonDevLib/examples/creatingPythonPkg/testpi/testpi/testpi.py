@@ -1,0 +1,2 @@
+def printHi():
+    print("Hi")

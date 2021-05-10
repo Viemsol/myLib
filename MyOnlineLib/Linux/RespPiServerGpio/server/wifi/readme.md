@@ -1,0 +1,1 @@
+Save private key and certificate in this folder
