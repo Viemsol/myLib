@@ -4,6 +4,7 @@ import time
 import os
 import threading
 import inspect
+import socket               # Import socket module
 
 piServ = 1 # if running on repberry pi set it to 1
 
@@ -16,7 +17,7 @@ def get_abs_filename(relativFilePath): #relative path to script is input, if scr
 print("Current working directory: {0}".format(os.getcwd()))
 app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = "files" # folder path
-app.config["MAX_CONTENT_PATH"] = 1024*2   # 2K max file size excepted
+app.config["MAX_CONTENT_PATH"] = 1024*4   # 4K max file size excepted
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 
@@ -25,9 +26,10 @@ ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 def give_greeting(name):
     return 'Hello, {0}!'.format(name)
     
-@app.route('/hello') # string to be used by clint "http://192.168.1.2:5000/hello"
-def hello():         # function to be used when this string received
-    return "Hello I am Running!"
+@app.route('/menu') # string to be used by clint "https://192.168.1.10:5000/menu"
+def menu():         # function to be used when this string received
+    res = sendCommand("htmlMenu".encode('utf-8'))# string to bytes
+    return(res.decode("utf-8"))
 # Flask Arguments
 # The query string begins after the question mark (?) character, And has key-value pairs separated by an ampersand (&) character:
 #example.com?arg1=value1&arg2=value2
@@ -46,24 +48,28 @@ def testGetPost():
         return("Post sucess")
     else:#get
          return("Get sucess")
-        
-@app.route('/Command',methods=['GET', 'POST'])# string to be used by clint "http://192.168.1.2:5000/Command?deviceStr=pwm&dataStr=24567898076"
+
+@app.route('/Command', methods=['GET', 'POST'])# string to be used by clint "https://192.168.1.10:5000/Command" and followed by json data object
 def Command():
-    deviceStr = request.args['deviceStr']                 # must argument
-    dataStr = request.args['dataStr']                     # must argument
-    if request.method == 'POST':
-        if(piServ==0):
-            return("Sucess: post "+deviceStr+dataStr)
-        else:
-            return(piLib.handleDevice(deviceStr,dataStr,"post"))
-    else:#get
-        if(piServ==0):
-            return("Sucess: get "+deviceStr+dataStr)
-        else:
-            return(piLib.handleDevice(deviceStr,dataStr,"get"))
-            
+    piCmd = ""
+    if(request.is_json):
+        content = request.json
+        piCmd = content['piCmd'] 
+    else:
+        piCmd = request.args['piCmd']                 # must argument
+    print("Command Received on Wifi :{}".format(piCmd))
+    res = sendCommand(piCmd.encode('utf-8'))# string to bytes
+    return(res.decode("utf-8")) # return string alwys
+##########################TOken Based####################################
+'''
+def hexStr2Bytes(hexStr):
+    data = bytearray.fromhex(hexStr) # get bytes from hex string
+    return(data)
+def xorBytes(var, key):
+    return bytes(a ^ b for a, b in zip(var, key))
+'''
 @app.route('/file', methods=['GET', 'POST'])
-def file():
+def File():
     # auto argument handling , use below if argument is must 
     # if key doesn't exist, returns a 400, bad request error
     #framework = request.args['framework']
@@ -95,7 +101,20 @@ def file():
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-           
+
+def sendCommand(reqBytes):
+    host = socket.gethostname() # Get local machine name
+    port = 12345                # Reserve a port for your service.
+    s = socket.socket()         # Create a socket object
+    s.connect((host, port))
+    print("sending Request :{}".format(reqBytes))
+    s.settimeout(10)
+    s.send(reqBytes)
+    respBytes = s.recv(1024*4) # max 4K size can be received
+    s.close()                     # Close the socket when done
+    print("Response received :{}".format(respBytes))
+    return(respBytes)
+    
 #################main#########
 if __name__ == '__main__':
     #app.run(debug= True, host = '0.0.0.0')

@@ -2,8 +2,11 @@
 
 ## to remove files 
 
-### remove all files
+### remove all files in current folder
 rm *
+
+### remove all files and folders recurcivly in current folder
+rm -r *
 
 ### remove all files in current directory with extention .pdf
 rm *.pdf
@@ -179,9 +182,43 @@ servernamePiPrivateKey.pem                                                      
 ### copy all file from windos folder to pi folder
 scp C:\Users\ndhavalikar\Desktop\RespPiZero\server\* pi@192.168.1.10:/home/pi/Project/wifiBleServ
 
-## Run Any script as in background as demon Manually
+
+### File Permissions
+
+- To view File Permission in folder
+
 ```code
-sudo nohup python /home/pi/Project/wifiBleServ/ble/sa.py &
+ ls -l *
+```
+
+- To view File Permission 
+
+```code
+ ls -l test.py
+```
+
+- To change File Permission  to executable
+
+```code
+ sudo chmod +x test.py
+```
+
+- To change File Permission  to read,write,executable fll permission
+
+```code
+ sudo chmod 777 test.py
+```
+
+## Run Any script as in background as demon Manually
+
+First give read ,write ,executable permission to log file
+```code
+sudo chmod 777 piLib.txt
+```
+
+```code
+
+sudo nohup python /home/pi/Project/server/piLib/pilib/piLib.py > /home/pi/Project/server/piLib/pilib/piLib.txt 2>&1
 ```
 ## Autmatically Run a program on your raspberry-pi / Linux at startup , in background as demon
 

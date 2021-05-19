@@ -206,6 +206,8 @@ chmod +x sa.py
 
 check if Pairing agent (simple agent by bluz)can run in demon(baground)
 
+
+
 ```code
 sudo nohup python /home/pi/Project/server/ble/sa.py &
 
