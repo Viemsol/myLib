@@ -12,15 +12,16 @@ wpa_supplicant_conf = "/etc/wpa_supplicant/wpa_supplicant.conf"
 sudo_mode = "sudo "
 menuOption="---Menu---\n1:Configur Wifi\n2:Get Pi Ip Address\n3:GPIO Test\n4:I2C test\n5:UART Test\n6:PWM Test\n7:Set Password\n8:Reboot\nSelect Option:\n"
 def CreateWifiConfig(SSID, password):
-    SSID = SSID.strip()
     with open("/etc/wpa_supplicant/wpa_supplicant.conf", "r") as wificfg:
         conf = wifiCfgPar.WpaSupplicantConf(wificfg)
-        conf.add_network(SSID, psk=password)
+        conf.add_network(SSID, psk='"'+password+'"')
     with open("/etc/wpa_supplicant/wpa_supplicant.conf", "w") as wificfg:
         conf.write(wificfg)
     print("Wifi config added")
   
 def wifi_connect(ssid, psk):
+    if((len(ssid)==0) or (len(psk)<8)):
+        return "error:psk < 8 char"
     # write wifi config to file
     CreateWifiConfig(ssid,psk)
     # reconfigure wifi
@@ -38,14 +39,14 @@ def wifi_connect(ssid, psk):
                             stderr=subprocess.PIPE)
     out, err = p.communicate()
     if out:
-        ip_address = out.strip()
+        ip_address = out.decode('utf-8').strip() # convert bytes to string
     else:
         ip_address = "<Not Set>"
     return ip_address
 
 def readDataStrip():
     cmd = client_sock.recv(1024)
-    return(cmd.strip())
+    return(cmd.decode('utf-8').strip()) # convert bytes to string
 
 def sendCommand(reqBytes):
     host = socket.gethostname() # Get local machine name
@@ -98,7 +99,7 @@ def bleConsole():
                         stderr=subprocess.PIPE)
         out, err = p.communicate()
         if out:
-            ip_address = out
+            ip_address = out.decode('utf-8') # convert bytes to string
         else:
             ip_address = "<Not Set>"
         client_sock.send("IP Address:"+ip_address)
@@ -123,7 +124,9 @@ time.sleep(10) # learning if this delay is not their sudo commab not work
 out = os.system("sudo sdptool add SP")
 print("Running Port.py\nadding serial port profile :",out)
 
-#subprocess.call(['sdptool', 'add','SP'], shell=True)
+#sudo hciconfig hci0 piscan
+out = os.system("sudo hciconfig hci0 piscan")
+
 try:
     while True:
         server_sock=BluetoothSocket( RFCOMM )

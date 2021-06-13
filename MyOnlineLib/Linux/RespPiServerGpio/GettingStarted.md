@@ -1,7 +1,8 @@
 # Pi zero 
 
 ## Setup Hardware
-- Format 8 GB sd card and install repbian OS with Basic graphis using image.exe utility
+- Format (use SD card formatter Software)8 GB sd card and install repbian OS with Basic graphis using image.exe utility
+- Other method is download .iso file from https://www.raspberrypi.org/software/operating-systems/ and write it to sd card using Win32 Disk imager
 - inser SD card to pi and boot , check Destop , mouse  keyboard working.
 - change respberry pi password
 - Connect to wifi
@@ -33,7 +34,6 @@ python3 --version
 ```code
 sudo apt install bluetooth libbluetooth-dev
 pip3 install pybluez
-sudo apt install vim
 ```
 
 ## Raspberry Pi Info 
@@ -164,19 +164,73 @@ https://192.168.1.10:5000/hello
 ```
 - What if Wifi is not present will server start?
     
-### Setup WIFI Soft AP on Rpi
+### Setup WIFI Soft AP on Rpi (RPI3 switch between wifi AP and client)
 
-TODO
+1) Setup Soft AP Configurations
+
+```code
+sudo apt-get install hostapd
+
+sudo nano /etc/hostapd/hostapd.conf
+# Set Below in same
+interface=wlan0
+ssid=HydroSys4
+hw_mode=g
+channel=6
+macaddr_acl=0
+auth_algs=1
+ignore_broadcast_ssid=0
+wpa=3
+wpa_passphrase=password
+wpa_key_mgmt=WPA-PSK
+wpa_pairwise=TKIP
+rsn_pairwise=CCMP
+
+```
+
+Edit Hostapd
+
+```code
+sudo nano /etc/init.d/hostapd
+
+# Add Below to DAEMON_CONF
+
+DAEMON_CONF=/etc/hostapd/hostapd.conf
+```
+2) Setting Up DNSMasq
+It’s now time to install DNSMasq. DNSmasq is required to provide dhcp server for the wifi AP connection.
+
+```code
+sudo apt-get install dnsmasq
+
+sudo nano /etc/dnsmasq.conf
+
+# add below
+
+interface=wlan0
+dhcp-range=192.168.0.100,192.168.0.200,12h
+```
+
+
+To enable host apd on boot
+```code
+sudo systemctl enable hostapd.service 
+```
+
+To  activate the dnsmasq service at boot
+```code
+sudo systemctl enable dnsmasq.service 
+```
+
+3) Swiching from AP to client mode
+```code
+sudo systemctl stop hostapd.service
+sudo systemctl stop dnsmasq.service
+```
 
 ### Setup BLE Server on Rpi
 
-- Install Bluz
-
-```code
-sudo apt-get install bluez
-sudo apt-get install pi-bluetooth 
-```
-
+- Install Bluz As above
 Now edit below file and make sure Below is BLE discoverable always:
 
 ```code
@@ -278,6 +332,117 @@ sudo systemctl daemon-reload;
 ```code
 sudo systemctl restart bluetooth.service;
 ```
+## SSH over USB
+
+1)remove sd card and edit  **cmdline.txt**
+After rootwait, append this text leaving only one space between rootwait and the new text (otherwise it might not be parsed correctly):
+```code
+modules-load=dwc2,g_ether
+```
+If there was any text after the new text make sure that there is only one space between that text and the new text
+Save the file
+
+2)edit  **config.txt**
+
+
+Append this line to the bottom of it:
+```code
+dtoverlay=dwc2
+```
+Save the file
+
+3) insert SD card to Pi, power Resp Pi, now open putty ssh session with name **raspberrypi.local**
+
+4)If you have not enabled ssh OR no access to HDMI , save empty file named ssh in boot, **remove .txt** extension
+
+5) user is **pi**, and the password is **raspberry**
+
+6) use ifconfig and get usb0 ip address and now using windows command scp we can trasfer files using **scp**
+## change UN and PW using SSH
+ 
+To change PW type below and follow instructions
+```code
+passwd
+```
+
+
+## enable peripherals using SSH
+Edit config.txt file OR use  **sudo respi-config**  and use arrow keys to configure 
+1) edit sd card and open config.txt 
+https://elinux.org/RPiconfig
+i.e  add below to enable camera
+```code
+#Enable Camera
+start_x=1
+```
+
+2) Add wifi config in below file 
+```code
+sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+
+```
+Add Below
+
+```code
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+country=IN
+network={
+        ssid="yourSSID"
+        psk="password"
+        key_mgmt=WPA-PSK
+}
+```
 
 ## setting up mqtt on Rpi
 https://www.youtube.com/watch?v=Pb3FLznsdwI
+
+## Dynamic Ip and local IP
+
+Dynamic IP is IP provided to WIFI Router by ISP and its comman to all devices conected to that rauter. Local IP is IP provided by Wifi Rauter to each device
+connected to WIF rauter. Local IP can be made static by changeing WIFI settings. Dynamic or public IP can be made static by paying ISP.
+
+### windoes command to get local IP
+```code
+ipconfig
+``` 
+
+### windoes command to get Dynamic or Public  IP
+```code
+nslookup myip.opendns.com resolver1.opendns.com
+```
+
+### Linux command to get local IP
+```code
+ifconfig
+``` 
+
+### Linux command to get Dynamic or Public  IP
+```code
+nslookup myip.opendns.com resolver1.opendns.com
+```
+
+## put your local website or IOT device communicate over Internet.
+
+As we know Static Ip is costly we can use poer forwording to communicate with our devices over internet.
+
+### 1) Port Forwording
+Wifi rauter can be Configured to forword all request comming on that port to perticular static Local IP.
+Public IP of rauter let say is 115.30.123.56 , and port forwarding config is 7867-> 168.197.1.3 then all request 115.30.123.56:7867 to port **7867**
+will be forworded to 168.197.1.3 device.
+As you know Public IP of router 115.30.123.56 may chnage on every poer cycle,thee shuld be some why to communicate it with remote device.
+one way is to use some free db and alwys IOT db update that db every 10 min with Dynamic IP. now clint can get Dynamic IP of IOT device and connect with port
+**7867**.
+
+### 2) SSH Tunneling
+
+### 2) Reverse SSH Tunneling 
+
+## Attacks
+### DNS Reflection ATTACk 
+Attacker send dns request to serach google IP, but with source address= Attck ITEm address (flipkart IP), now DNS send repose(IP of gggole to flipkart) Source IP address. Attaker send differant DNS request for which rsponce from DNS is large data to flipkart and flipkart will be flodded with fals DNS responce.
+Thow this DNS responces will be discared by flipkart as flip kart did not requested it,But it will waste its time processing/decryting same.
+
+### TCP half or SYN half attack
+Attacker spend TCP SYN packet  but with false or different source address in packet to server . server send TC ACK to unknown server and wait.
+as unknown address do not replay. Attacker flood half TCP request from different computer and distributed computer to server, and Legitimate user get denial of service . 

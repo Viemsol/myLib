@@ -233,14 +233,13 @@ namespace DesktopApp1
             //read credentials
             // Cryptography.EncryptFile("ABCDEFGH", "cred.ini", "credout.ini");
             // Cryptography.DecryptFile("ABCDEFGH", "credout.ini", "cred.ini");
-            MyCredIni = new IniFile("cred.ini");
-            MyCredIni.Write("username", "Enter User Name", "Cred"); //erase cred if any
-            MyCredIni.Write("password", "Enter Password", "Cred"); // erase cred 
+
             //Read Ini file and update variables
             MyIni = new IniFile("settings.ini");
            
             if(MyIni.Read("credStore", "Product") == "true")
             {
+                MyCredIni = new IniFile("cred.ini");
                 //cred
                 if (!((MyCredIni.KeyExists("username", "Cred")) && (MyCredIni.KeyExists("password", "Cred"))))
                 {
@@ -335,8 +334,12 @@ namespace DesktopApp1
         }
         private void OnApplicationExit(object sender, EventArgs e)
         {
-            MyCredIni.Write("username", "Enter User Name", "Cred");
-            MyCredIni.Write("password", "Enter Password", "Cred");
+            if (MyIni.Read("credStore", "Product") == "true")
+            {
+                MyCredIni.Write("username", "Enter User Name", "Cred");
+                MyCredIni.Write("password", "Enter Password", "Cred");
+            }
+
         }
         // login function
         private void Bt_Login_Click(object sender, EventArgs e)
@@ -415,7 +418,7 @@ namespace DesktopApp1
          
             startInfo.Arguments = Arguments;
             Log.Text = "CLI:" + startInfo.FileName + " "+ Arguments;
-            log2file("\r\nExecuting>File: "+ startInfo.FileName +"\r\nPerameter: "+ Arguments);
+            log2file("\r\nExecuting Process: "+ startInfo.FileName +"\r\nProcess Parameter: "+ Arguments);
             try
             {
                 // Start the process with the info we specified.
@@ -519,7 +522,7 @@ namespace DesktopApp1
         //Function handles button click
         private void DynamicButton_Click(object sender, EventArgs e)
         {
-            string scriptPerameter="";
+            string scriptPerameter=" ";
             var button = (Button)sender;
             String errHint = "";
             String ButtonArg = "";
@@ -537,30 +540,33 @@ namespace DesktopApp1
             String fileToCliOveride = MyIni.Read("fileToCliOveride", button.Name);
             String paraToCliOveride = MyIni.Read("paraToCliOveride", button.Name);
 
-            //script overide check .py /.bat ...etc
-            if (paraToCliOveride.Contains("."))
-            {
-                Cli_Cmd = paraToCliOveride + " ";
-            }
-            else if(paraToCliOveride.Contains("none"))
-            {
-                Cli_Cmd = "";
-            }
-            else
-            {
-                Cli_Cmd = paraToCli + " ";
-            }
 
-                
-            // overide check python.exe/bat.exe...
-            if (fileToCliOveride.Contains("."))
-            {
-                startInfo.FileName = fileToCliOveride;
-            }
-            else
+            // override executable to cli command
+            if (fileToCliOveride.Trim() == "default")
             {
                 startInfo.FileName = fileToCli;
             }
+            else
+            {
+                startInfo.FileName = fileToCliOveride;
+            }
+            
+            //override parameter of executable
+            if(paraToCliOveride.Trim() == "none")
+            {
+                Cli_Cmd = "";
+            }
+            else if (paraToCliOveride.Trim() == "default")
+            {
+                Cli_Cmd = paraToCli;
+            }
+            else
+            {
+                Cli_Cmd = paraToCliOveride;
+            }
+
+                
+
             // scan through all arguments in button
             while (MyIni.KeyExists("ButtonArg" + argIdx.ToString(), button.Name))
             {
@@ -571,14 +577,7 @@ namespace DesktopApp1
                 
                 if (ButtonArg == "filepath" || ButtonArg == "folderpath")
                 {
-                    if(ButtonArg == "filepath")
-                    {
-                        openFileDialog1.Title = " " + ButtonArgHelp;
-                    }
-                    else
-                    {
-                        openFileDialog1.Title = " "+ ButtonArgHelp;
-                    }
+                    openFileDialog1.Title = " " + ButtonArgHelp;
  
                     if (openFileDialog1.ShowDialog() == DialogResult.OK)
                     {

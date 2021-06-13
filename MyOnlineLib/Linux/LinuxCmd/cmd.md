@@ -1,5 +1,17 @@
 # linux command
 
+## OS Info
+
+Get Os Info
+```code
+cat /etc/os-release
+```
+
+get Karnal version
+```code
+uname -a
+```
+
 ## to remove files 
 
 ### remove all files in current folder
